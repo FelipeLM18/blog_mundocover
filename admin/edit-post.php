@@ -1,8 +1,6 @@
 <?php //include config
 require_once('../includes/config.php');
 
-//if not logged in redirect to login page
-//if(!$user->is_logged_in()){ header('Location: login.php'); }
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -37,15 +35,15 @@ require_once('../includes/config.php');
 
 	<?php
 
-	//if form has been submitted process it
+
 	if(isset($_POST['submit'])){
 
 		$_POST = array_map( 'stripslashes', $_POST );
 
-		//collect form data
+
 		extract($_POST);
 
-		//very basic validation
+
 		if($postID ==''){
 			$error[] = 'Este post nao tem uma identificaçao valida!.';
 		}
@@ -66,7 +64,7 @@ require_once('../includes/config.php');
 
 			try {
 
-				//insert into database
+
 				$stmt = $db->prepare('UPDATE blog_posts SET postTitulo = :postTitulo, postDesc = :postDesc, postCont = :postCont WHERE postID = :postID') ;
 				$stmt->execute(array(
 					':postTitulo' => $postTitulo,
@@ -75,7 +73,7 @@ require_once('../includes/config.php');
 					':postID' => $postID
 				));
 
-				//redirect to index page
+
 				header('Location: index.php?action=updated');
 				exit;
 
@@ -91,7 +89,7 @@ require_once('../includes/config.php');
 
 
 	<?php
-	//check for any errors
+	
 	if(isset($error)){
 		foreach($error as $error){
 			echo $error.'<br />';

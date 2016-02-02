@@ -2,13 +2,10 @@
 //include config
 require_once('../includes/config.php');
 
-//if not logged in redirect to login page
-//if(!$user->is_logged_in()){ header('Location: login.php'); }
 
-//show message from add / edit page
 if(isset($_GET['deluser'])){
 
-	//if user id is 1 ignore
+
 	if($_GET['deluser'] !='1'){
 
 		$stmt = $db->prepare('DELETE FROM blog_usuario WHERE usuarioID = :usuarioID') ;
@@ -46,7 +43,7 @@ if(isset($_GET['deluser'])){
 	<?php include('menu.php');?>
 
 	<?php
-	//show message from add / edit page
+	
 	if(isset($_GET['action'])){
 		echo '<h3>User '.$_GET['action'].'.</h3>';
 	}

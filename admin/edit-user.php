@@ -1,8 +1,6 @@
 <?php //include config
 require_once('../includes/config.php');
 
-//if not logged in redirect to login page
-//if(!$user->is_logged_in()){ header('Location: login.php'); }
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -25,13 +23,13 @@ require_once('../includes/config.php');
 
 	<?php
 
-	//if form has been submitted process it
+
 	if(isset($_POST['submit'])){
 
-		//collect form data
+
 		extract($_POST);
 
-		//very basic validation
+
 		if($usuario ==''){
 			$error[] = 'Por favor insira um usuario.';
 		}
@@ -65,7 +63,6 @@ require_once('../includes/config.php');
 
 					$hashedpassword = $user->password_hash($senha, PASSWORD_BCRYPT);
 
-					//update into database
 					$stmt = $db->prepare('UPDATE blog_usuario SET usuario = :usuario, senha = :senha, email = :email WHERE usuarioID = :usuarioID') ;
 					$stmt->execute(array(
 						':usuario' => $usuario,
@@ -77,7 +74,7 @@ require_once('../includes/config.php');
 
 				} else {
 
-					//update database
+
 					$stmt = $db->prepare('UPDATE blog_usuario SET usuario = :usuario, email = :email WHERE usuarioID = :usuarioID') ;
 					$stmt->execute(array(
 						':usuario' => $usuario,
@@ -88,7 +85,7 @@ require_once('../includes/config.php');
 				}
 
 
-				//redirect to index page
+
 				header('Location: users.php?action=updated');
 				exit;
 
@@ -104,7 +101,7 @@ require_once('../includes/config.php');
 
 
 	<?php
-	//check for any errors
+	
 	if(isset($error)){
 		foreach($error as $error){
 			echo $error.'<br />';

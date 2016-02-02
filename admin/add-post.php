@@ -1,8 +1,6 @@
 <?php //include config
 require_once('../includes/config.php');
 
-//if not logged in redirect to login page
-//if(!$user->is_logged_in()){ header('Location: login.php'); }
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -60,16 +58,16 @@ require_once('../includes/config.php');
 		if(!isset($error)){
       try {
 
-				//insert into database
+
 				$stmt = $db->prepare('INSERT INTO blog_posts (postTitulo,postDesc,postCont,postData) VALUES (:postTitulo, :postDesc, :postCont, :postData)') ;
 				$stmt->execute(array(
-					':postTitle' => $postTitulo,
+					':postTitulo' => $postTitulo,
 					':postDesc' => $postDesc,
 					':postCont' => $postCont,
 					':postData' => date('Y-m-d H:i:s')
 				));
 
-				//redirect to index page
+
 				header('Location: index.php?action=added');
 				exit;
 
@@ -81,9 +79,7 @@ require_once('../includes/config.php');
 
 	}
 
-
-
-	//check for any errors
+	
 	if(isset($error)){
 		foreach($error as $error){
 			echo '<p class="error">'.$error.'</p>';

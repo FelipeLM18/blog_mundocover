@@ -2,10 +2,8 @@
 //include config
 require_once('../includes/config.php');
 
-//if not logged in redirect to login page
-//if(!$user->is_logged_in()){ header('Location: login.php'); }
 
-//show message from add / edit page
+
 if(isset($_GET['delpost'])){
 
 	$stmt = $db->prepare('DELETE FROM blog_posts WHERE postID = :postID') ;
@@ -27,7 +25,7 @@ if(isset($_GET['delpost'])){
   <script language="JavaScript" type="text/javascript">
   function delpost(id, titulo)
   {
-	  if (confirm("Are you sure you want to delete '" + title + "'"))
+	  if (confirm("Tem certeza de que deseja excluir '" + title + "'"))
 	  {
 	  	window.location.href = 'index.php?delpost=' + id;
 	  }
@@ -49,9 +47,9 @@ if(isset($_GET['delpost'])){
 
 	<table>
 	<tr>
-		<th>Title</th>
-		<th>Date</th>
-		<th>Action</th>
+		<th>Titylo</th>
+		<th>Data</th>
+		<th>Açao</th>
 	</tr>
 	<?php
 		try {

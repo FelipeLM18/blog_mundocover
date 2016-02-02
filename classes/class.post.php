@@ -22,8 +22,18 @@ class posts{
     }
 
     public function insertPost(){
-      
-    }
+    $stmt = $db->prepare('INSERT INTO blog_posts (postTitulo,postDesc,postCont,postData) VALUES (:postTitulo, :postDesc, :postCont, :postData)') ;
+    $stmt->execute(array(
+      ':postTitle' => $postTitulo,
+      ':postDesc' => $postDesc,
+      ':postCont' => $postCont,
+      ':postData' => date('Y-m-d H:i:s')
+    ));
+
+    return $stmt->execute();
+  }
+
+
 
 
 

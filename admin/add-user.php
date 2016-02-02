@@ -1,7 +1,5 @@
 <?php //include config
 require_once('../includes/config.php');
-//if not logged in redirect to login page
-//if(!$user->is_logged_in()){ header('Location: login.php'); }
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -23,13 +21,13 @@ require_once('../includes/config.php');
 
 	<?php
 
-	//if form has been submitted process it
+
 	if(isset($_POST['submit'])){
 
-		//collect form data
+
 		extract($_POST);
 
-		//very basic validation
+
 		if($usuario ==''){
 			$error[] = 'Por favor insira um usuario.';
 		}
@@ -56,7 +54,7 @@ require_once('../includes/config.php');
 
 			try {
 
-				//insert into database
+				//inserir no banco
 				$stmt = $db->prepare('INSERT INTO blog_usuario (usuario,senha,email) VALUES (:usuario, :senha, :email)') ;
 				$stmt->execute(array(
 					':usuario' => $usuario,
@@ -64,7 +62,7 @@ require_once('../includes/config.php');
 					':email' => $email
 				));
 
-				//redirect to index page
+				//redireciona para a index
 				header('Location: users.php?action=added');
 				exit;
 
@@ -76,7 +74,6 @@ require_once('../includes/config.php');
 
 	}
 
-	//check for any errors
 	if(isset($error)){
 		foreach($error as $error){
 			echo '<p class="error">'.$error.'</p>';
